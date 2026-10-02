@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://cp0gncmr6k0x"]
 
 [ext_resource type="Texture2D" uid="uid://mssrhkk6ptke" path="res://assets/ChrisIdle.png" id="1_bqd7h"]
+[ext_resource type="Texture2D" uid="uid://foha4uj7dke6" path="res://assets/ChrisWalkLeft.png" id="2_i3auh"]
+[ext_resource type="Texture2D" uid="uid://clkfd3tfu7cfd" path="res://assets/ChrisWalkRight.png" id="3_cud1y"]
 
 [sub_resource type="GDScript" id="GDScript_r28x0"]
 script/source = "extends CharacterBody2D
@@ -29,6 +31,15 @@ func _physics_process(delta: float) -> void:
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
+	
+	if velocity.x == 0:
+		$AnimatedSprite2D.animation = \"idle\"
+	elif velocity.x < 0:
+		$AnimatedSprite2D.animation = \"walk_left\"
+	elif velocity.x > 0:
+		$AnimatedSprite2D.animation = \"walk_right\"
+	$AnimatedSprite2D.play()
+		
 
 	move_and_slide()
 "
@@ -41,6 +52,30 @@ region = Rect2(0, 0, 8, 8)
 atlas = ExtResource("1_bqd7h")
 region = Rect2(8, 0, 8, 8)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_daubh"]
+atlas = ExtResource("2_i3auh")
+region = Rect2(16, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_irbam"]
+atlas = ExtResource("2_i3auh")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_at1vh"]
+atlas = ExtResource("2_i3auh")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j3bj3"]
+atlas = ExtResource("3_cud1y")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ke0vx"]
+atlas = ExtResource("3_cud1y")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ijb1s"]
+atlas = ExtResource("3_cud1y")
+region = Rect2(16, 0, 8, 8)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_r28x0"]
 animations = [{
 "frames": [],
@@ -49,7 +84,7 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 5.0,
 "texture": SubResource("AtlasTexture_u7aoa")
 }, {
 "duration": 5.0,
@@ -57,6 +92,34 @@ animations = [{
 }],
 "loop": 1,
 "name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_daubh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_irbam")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_at1vh")
+}],
+"loop": 1,
+"name": &"walk_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j3bj3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ke0vx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ijb1s")
+}],
+"loop": 1,
+"name": &"walk_right",
 "speed": 5.0
 }]
 
@@ -74,7 +137,7 @@ script = SubResource("GDScript_r28x0")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1108293237]
 sprite_frames = SubResource("SpriteFrames_r28x0")
 animation = &"idle"
-frame_progress = 0.41403952
+frame_progress = 0.09548923
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=720914285]
 position = Vector2(0, 1)
