@@ -60,8 +60,8 @@ layer = -200
 follow_viewport_enabled = true
 
 [node name="ColorRect" type="ColorRect" parent="CharacterBody2D/CanvasLayer" unique_id=286415491]
-offset_left = -168.0
-offset_top = -153.0
+offset_left = -200.0
+offset_top = -179.0
 offset_right = 483.0
 offset_bottom = 138.0
 color = Color(1, 0.5, 0, 0.65882355)
