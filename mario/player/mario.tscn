@@ -1,14 +1,14 @@
 [gd_scene format=3 uid="uid://cp0gncmr6k0x"]
 
-[ext_resource type="Script" uid="uid://c5rmxsax7yf5p" path="res://player/mario.gd" id="1_bqd7h"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sun02"]
 
-[node name="Mario" type="Node2D" unique_id=2124118048]
-script = ExtResource("1_bqd7h")
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1719779646]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=369639725]
 
-[node name="Area2D" type="Area2D" parent="." unique_id=1043194386]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=720914285]
-
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1739746597]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=720914285]
+shape = SubResource("CapsuleShape2D_sun02")
+
+[node name="Area2D" type="Area2D" parent="CollisionShape2D" unique_id=1043194386]
