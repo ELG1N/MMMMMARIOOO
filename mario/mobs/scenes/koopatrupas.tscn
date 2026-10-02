@@ -1,12 +1,52 @@
 [gd_scene format=3 uid="uid://b77bhmalhxgrs"]
 
-[ext_resource type="Script" uid="uid://bamw6fidomnej" path="res://mobs/scripts/koopatrupas.gd" id="1_jyp6y"]
+[ext_resource type="Script" uid="uid://bcnwwy3ga554s" path="res://mobs/scenes/koopatrupas.gd" id="1_cqtw3"]
+[ext_resource type="Texture2D" uid="uid://b1jjt5aui16dt" path="res://assets/Goomba.png" id="2_cqtw3"]
 
-[node name="Koopatrupas" type="Node2D" unique_id=1324637515]
-script = ExtResource("1_jyp6y")
+[sub_resource type="SpriteFrames" id="SpriteFrames_sun02"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_cqtw3")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
-[node name="Area2D" type="Area2D" parent="." unique_id=1859491270]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sun02"]
+size = Vector2(6, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1726003103]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yv3sp"]
+size = Vector2(8, 5)
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=116787624]
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1958171231]
+script = ExtResource("1_cqtw3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1546587704]
+position = Vector2(0, -4)
+sprite_frames = SubResource("SpriteFrames_sun02")
+
+[node name="killbox" type="Area2D" parent="." unique_id=764252028]
+position = Vector2(0, -4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="killbox" unique_id=1538356098]
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_sun02")
+debug_color = Color(0.9999998, 0.007315682, 0.07496419, 0.41960785)
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1304151738]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1726003103]
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_yv3sp")
+
+[node name="collisionbox" type="Area2D" parent="." unique_id=1859491270]
+position = Vector2(0, -4)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="collisionbox" unique_id=131757551]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_yv3sp")
+
+[connection signal="body_entered" from="killbox" to="." method="_on_killbox_body_entered"]
+[connection signal="area_entered" from="collisionbox" to="." method="_on_collisionbox_area_entered"]
